@@ -1,3 +1,6 @@
+using DBFirst_EF.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace DBFirst_EF
 {
     public class Program
@@ -8,6 +11,15 @@ namespace DBFirst_EF
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
+            // Dependency Injection
+            // DB iþlemleri için
+            builder.Services.AddDbContext<NORTHWNDContext>(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
+
+
+
+
 
             var app = builder.Build();
 

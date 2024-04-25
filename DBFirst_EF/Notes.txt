@@ -9,3 +9,12 @@
 	Microsoft.EntityFramework.Core.Tools
 	Microsoft.Extensions.Configuration
 	Microsoft.VisualStudio.Web.CodeGeneration
+
+-- Hazır bir VTnın projeye dahil edilmesi.
+	Bunun için Nuget Package Manager Console dan yardım alacağız.
+
+	PM> Scaffold-DbContext "Data Source=EGITMEN;Initial Catalog=NORTHWND;Integrated Security=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+	Eğer VT tarafında bir değişiklik olduğunda
+
+	PM> Scaffold-DbContext "Data Source=EGITMEN;Initial Catalog=NORTHWND;Integrated Security=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -force
