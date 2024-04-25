@@ -21,8 +21,11 @@ namespace DBFirst_EF.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var nORTHWNDContext = _context.Products.Include(p => p.Category).Include(p => p.Supplier);
-            return View(await nORTHWNDContext.ToListAsync());
+            var data = _context.Products.Include(p => p.Category).Include(p => p.Supplier);
+
+
+
+            return View(await data.ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -41,6 +44,8 @@ namespace DBFirst_EF.Controllers
             {
                 return NotFound();
             }
+            //ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", product.CategoryId);
+            //ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "CompanyName", product.SupplierId);
 
             return View(product);
         }
@@ -79,13 +84,19 @@ namespace DBFirst_EF.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products
+                .Include(p=> p.Category)
+                .Include(p=> p.Supplier)
+                .FirstOrDefaultAsync(m=> m.ProductId == id);
+
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", product.CategoryId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", product.SupplierId);
+
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", product.CategoryId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "CompanyName", product.SupplierId);
+
             return View(product);
         }
 

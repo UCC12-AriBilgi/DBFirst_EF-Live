@@ -22,6 +22,7 @@ namespace DBFirst_EF.Controllers
         public async Task<IActionResult> Index()
         {
             var nORTHWNDContext = _context.Territories.Include(t => t.Region);
+
             return View(await nORTHWNDContext.ToListAsync());
         }
 
@@ -81,7 +82,7 @@ namespace DBFirst_EF.Controllers
             {
                 return NotFound();
             }
-            ViewData["RegionId"] = new SelectList(_context.Regions, "RegionId", "RegionId", territory.RegionId);
+            ViewData["RegionId"] = new SelectList(_context.Regions, "RegionId", "RegionDescription", territory.RegionId);
             return View(territory);
         }
 
@@ -117,7 +118,7 @@ namespace DBFirst_EF.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RegionId"] = new SelectList(_context.Regions, "RegionId", "RegionId", territory.RegionId);
+            ViewData["RegionId"] = new SelectList(_context.Regions, "RegionId", "RegionDescription", territory.RegionId);
             return View(territory);
         }
 
