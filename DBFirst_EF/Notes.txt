@@ -1,0 +1,11 @@
+﻿- Entity Framework (EF)
+- Uygulamamızı Database First (DbF) yöntemiyle yazacağız.
+- Örnek db Northwind
+
+-- Öncelikle EF i kullanabilmek için gerekli nuget paketlerini yüklememiz gerekiyor.
+	Microsoft.EntityFramework.Core
+	Microsoft.EntityFramework.Core.Design
+	Microsoft.EntityFramework.Core.SqlServer
+	Microsoft.EntityFramework.Core.Tools
+	Microsoft.Extensions.Configuration
+	Microsoft.VisualStudio.Web.CodeGeneration
